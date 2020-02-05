@@ -6,8 +6,6 @@ request = requests.get('https://api.codenation.dev/v1/challenge/dev-ps/generate-
 
 json_dados = json.loads(request.content)
 
-print(json_dados)
-
 caracteres = 'abcdefghijklmnopqrstuvwxyz'
 chave = json_dados["numero_casas"]
 mensagem_cifrada = json_dados["cifrado"]
@@ -30,6 +28,7 @@ for caractere in mensagem_cifrada:
 
 print('O texto decifrado é ', mensagem_decifrada)
 
+json_dados["mensagem_decifrada"] = mensagem_decifrada
 
 sha1 = hashlib.sha1(mensagem_decifrada.encode())
 json_dados["resumo_criptografico"] = sha1.hexdigest()
@@ -41,7 +40,6 @@ with open("answer.json", "w") as f:
 
 answer = {'answer': ('answer.json', open("answer.json", "rb"))}
 
-
-request = requests.get('https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=12768e626035a6d4296b9e316aa251154397643e')
+request = requests.post('https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=12768e626035a6d4296b9e316aa251154397643e', file = answer)
 
 print(request.json())
