@@ -40,6 +40,6 @@ with open("answer.json", "w") as f:
 
 answer = {'answer': ('answer.json', open("answer.json", "rb"))}
 
-request = requests.post('https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=12768e626035a6d4296b9e316aa251154397643e', file = answer)
+request = requests.post('https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=12768e626035a6d4296b9e316aa251154397643e', files = answer)
 
 print(request.json())
